@@ -1,0 +1,7 @@
+export const CHANGE='changelayout'
+export const ADD_WIDGET='el_add'
+export const ADD_LINE='line_add'
+export const RECEIVE='msg_receive'
+export const SELECTROW='row_select'
+export const SETTINGSHOW='setting_show'
+export const SET_CONTAINNER = 'containner_set'
