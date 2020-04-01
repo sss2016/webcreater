@@ -108,6 +108,7 @@ class Container extends Component {
       onSetCurrentContainner(e){
         // e.stopPropagation();
         // e.nativeEvent.stopImmediatePropagation()
+        console.log('设置了容器')
         this.props.onSetCurrentContainner(this.state.layerinfo)
       }
     render() {

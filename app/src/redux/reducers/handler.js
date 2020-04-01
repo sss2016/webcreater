@@ -62,7 +62,8 @@ export function lineAddHandler(oldWidgets,layerInfo){
       return oldWidgets;
   }
   export function setting_show(oldWidgets,selection,layerInfo,data){
-    let configs=oldWidgets[layerInfo.row].cols[layerInfo.col].widgets[selection]
+    console.log(oldWidgets[layerInfo.row].cols)
+    let configs=oldWidgets[layerInfo.row].cols[layerInfo.col].configs
     if(layerInfo.level==1&&data.setType!='form')
       configs= oldWidgets[layerInfo.row].cols[layerInfo.col].widgets[data.setobjInfo.row].cols[data.setobjInfo.col].configs
 

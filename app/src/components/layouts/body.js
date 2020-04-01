@@ -128,7 +128,7 @@ class AppBody extends PureComponent {
 
           </ToolsBar>
         </div>
-        <div style={{width:'60%',height:'600px'}}>
+        <div style={{width:'60%',height:'600px'}} id='vHTML'>
           <Container 
           widgets={this.props.widgets} 
           onRemoveItem={(r,c)=>{
