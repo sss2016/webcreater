@@ -13,7 +13,7 @@ const option={
     'form_submit':{w: 100, h: 30, minW: 100, maxW: 200,minH:30,maxH:50,
         configs:{label:'submit',name:'submit',isRequired:false}
     },
-    'form_input':{w: '100%',  minW: 100, maxW: 200,minH:30,maxH:50,
+    'form_input':{w: 200,  minW: 200, maxW: 400,minH:50,maxH:70,h:50,
         configs:{label:'input',name:'input',isRequired:false}
     },
     'form_select':{w: 100,  minW: 100, maxW: 200,minH:30,maxH:50,

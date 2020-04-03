@@ -25,9 +25,11 @@ class Mylayout extends React.Component {
   }
   render(){
     console.log(this.props)
+    let createHashHistory =require("history").createHashHistory
+    const hashHistory = new createHashHistory();
   return (
     <Layout id="components-layout-demo-custom-trigger">
-        <SideMenu onGetPath={this.onGetPath.bind(this)}>
+        <SideMenu onGetPath={this.onGetPath.bind(this)} history={hashHistory}>
 
         </SideMenu>
         <Layout>
@@ -47,7 +49,7 @@ class Mylayout extends React.Component {
             }}
           >
 
-            <RouteTable></RouteTable>
+            <RouteTable history={hashHistory}></RouteTable>
           </Content>
         </Layout>
       </Layout>

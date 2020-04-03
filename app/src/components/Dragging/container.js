@@ -28,6 +28,7 @@ class Container extends Component {
         }
     }
     onSelectRow(row,e){
+
         var selector = e.target;
         if(!$(selector).hasClass('line')) return;
         $('.line').css({
@@ -37,21 +38,13 @@ class Container extends Component {
         selector.style.border='1px dashed #000'
         let rowstyle = {
             row:row,
-            setType:'row',
-            setVisible:true,
+            layerinfo:this.state.layerinfo
         }
         this.props.onSelectRow(rowstyle);
     }
     createEl(){
-        const option = {
-            move : 'both',
-            restricted : false,
-            changeSize : true,
-            supportDelete : true,
-            reIndex : false,
-            border: '1px solid #f5a351',
-            
-        }
+        let boxarrangeWay = ['left','center','right']
+        let flexarrangeWay=[' flex-start','center','flex-end']
         let formColname = []
         let formindex = 0;
         let row = this.state.layerinfo.row;
@@ -59,9 +52,19 @@ class Container extends Component {
         let level = this.state.layerinfo.level
         let widgets = this.state.layerinfo.level==1?this.props.widgets[row].cols[col].widgets:this.props.widgets
         var allComponent = _.map(widgets, (l, i) => {
-                let h = l.cols.length<1?{height:'100px'}:{};
+                let h = l.cols.length<1?100:'auto';
+                console.log('gao',h)
+                let style =!l.configs.isAuto?{
+                    height:l.configs.lineH,
+                    display:'flex',
+                    alignItems:flexarrangeWay[l.configs.arrangeWay_y-1],
+                    justifyContent:flexarrangeWay[l.configs.arrangeWay_x-1],
+                }:{
+                    height:h,
+                    textAlign:boxarrangeWay[l.configs.arrangeWay_x-1]
+                }
               return(
-                  <div className='line' iname={l.name} key={i} style={h} onClick={this.onSelectRow.bind(this,i)}>
+                  <div className='line' iname={l.name} key={i} style={style} onClick={this.onSelectRow.bind(this,i)}>
                       {
                       _.map(l.cols,(v,k)=>{
                         if(v.configs.label) {
@@ -70,7 +73,7 @@ class Container extends Component {
                         }
                         return(  
                          <div className='col' key={k} >
-                             <Dragging option={option} 
+                             <Dragging 
                              row={i} col={k} 
                              ikey={level+''+row+''+col+''+i+''+k} 
                              dragdatas={v} parentlayerinfo={this.state.layerinfo}
@@ -106,16 +109,18 @@ class Container extends Component {
         }
       }
       onSetCurrentContainner(e){
-        // e.stopPropagation();
-        // e.nativeEvent.stopImmediatePropagation()
-        console.log('设置了容器')
+        e.stopPropagation();
+        e.nativeEvent.stopImmediatePropagation()
+        console.log('设置了容器',this.state.layerinfo)
+        $('.template-img-wrap').css({border:'1px solid black'})
+        $(e.target).css({border:'1px dashed red'})
         this.props.onSetCurrentContainner(this.state.layerinfo)
       }
     render() {
             if(this.state.layerinfo.level==1)
                 console.log('渲染内部容器')
         return (
-                <div name="template-img-wrap"  onClick={this.onSetCurrentContainner.bind(this)}
+                <div className="template-img-wrap"  onClick={this.onSetCurrentContainner.bind(this)}
                 style={{width:'100%',height:'100%',border:'1px solid #333'}}>
                    {this.createEl()}
                 </div>

@@ -7,7 +7,7 @@ export default class SideMenu extends React.Component {
     collapsed: false,
   };
   onGetPath(e){
-    this.props.onGetPath(e.key)
+    this.props.history.push(e.key)
   }
   toggle = () => {
     this.setState({

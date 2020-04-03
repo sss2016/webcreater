@@ -75,8 +75,8 @@ class Dragging extends Component {
 		let component;
 		let posInArray = {
 			level:1,
-			row:this.props.parentlayerinfo.row,
-			col:this.props.parentlayerinfo.col,
+			row:this.props.row,
+			col:this.props.col,
 			mform:this.props.mform
 		}
 		let model= 'dev'

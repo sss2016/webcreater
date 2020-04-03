@@ -18,8 +18,6 @@ const enhancer = compose(
     DevTools.instrument()
   );
 const store = createStore(reducer,enhancer)
-let createHashHistory =require("history").createHashHistory
-const hashHistory = new createHashHistory();
 render(  
     <Provider store={store}>
         <div>

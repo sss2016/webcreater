@@ -1,5 +1,5 @@
-import {CHANGE,ADD_LINE,ADD_WIDGET,SELECTROW,SETTINGSHOW,SET_CONTAINNER,SET_Field,SET_PROPERTY} from '../actionType';
-import {widgetsChangeHandler,widgetsAddHandler,lineAddHandler,setting_show,propertyChangeHandler} from './handler'
+import {CHANGE,ADD_LINE,ADD_WIDGET,SELECTROW,SETTINGSHOW,SET_CONTAINNER,SET_Field,SET_PROPERTY,SET_LAYOUT_PROPERTY} from '../actionType';
+import {widgetsChangeHandler,widgetsAddHandler,lineAddHandler,setting_show,propertyChangeHandler,layoutPropertyChange} from './handler'
 export function layout(
     state={    
             widgets:[]
@@ -42,15 +42,23 @@ export function layout(
                 currentContainner:state.currentContainner
             }
         case SELECTROW:
+            let configs;
+            let layerinfo = action.payload.layerinfo
+            if(layerinfo.level==0){
+                configs = state.widgets[action.payload.row].configs
+            }else{
+                configs = state.widgets[layerinfo.row].cols[layerinfo.col].widgets[action.payload.row].configs
+            }
             return {
                 selection:action.payload.row,
                 widgets:state.widgets,
                 setting:{
                     setKey:null,
                     setVisible:true,
-                    setType:'row'
+                    setType:'row',
+                    configs:configs
                 },
-                currentContainner:state.currentContainner
+                currentContainner:layerinfo
             };
         case SETTINGSHOW:
             let setting = setting_show(state.widgets,state.selection,state.currentContainner,action.payload)
@@ -75,6 +83,14 @@ export function layout(
             }
         case SET_PROPERTY:
             propertyChangeHandler(state,action.payload)
+            return {
+                setting:state.setting,
+                widgets:[...state.widgets],
+                selection:state.selection,
+                currentContainner:state.currentContainner,
+            }
+        case SET_LAYOUT_PROPERTY:
+            layoutPropertyChange(state,action.payload)
             return {
                 setting:state.setting,
                 widgets:[...state.widgets],

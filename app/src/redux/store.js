@@ -1,4 +1,4 @@
-import {changeLayout,el_add,line_add,row_select,setting_show,containner_set,pageFormField_set,property_set}from './actions'
+import {changeLayout,el_add,line_add,row_select,setting_show,containner_set,pageFormField_set,property_set,layoutPropertyChange}from './actions'
 export function mapDispatchToProps(dispatch){
     return {
         onChangeWidgets:(e)=>dispatch(changeLayout(e)),
@@ -9,6 +9,7 @@ export function mapDispatchToProps(dispatch){
         onSetCurrentContainner:(e)=>dispatch(containner_set(e)),
         onSetPageFormField:(e)=>dispatch(pageFormField_set(e)),
         onSetProperty:(e)=>dispatch(property_set(e)),
+        onSetLayoutProperty:(e)=>dispatch(layoutPropertyChange(e))
 
     }
 

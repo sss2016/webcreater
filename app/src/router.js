@@ -6,12 +6,11 @@ import { HashRouter, Route, Switch } from 'react-router-dom'
 
 export default class RouteTable extends React.Component{
     render(){
-        let createHashHistory =require("history").createHashHistory
-        const hashHistory = new createHashHistory();
-        console.log('this.props.c_history',this.props.c_history)
+
+        // console.log('this.props.c_history',this.props.c_history)
         // hashHistory.push(this.props.c_history)
         return(
-            <HashRouter history={hashHistory}>
+            <HashRouter history={this.props.hashHistory}>
                 <Switch>
                     <Route path='/a' exact component={AppBody}/>   
                     <Route path='/mydesign' exact component={DesignMan}/> 

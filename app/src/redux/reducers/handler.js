@@ -28,17 +28,44 @@ export function propertyChangeHandler(state,configs){
       newarr[layerInfo.row].cols[layerInfo.col].configs=configs
     else{
       newarr[state.selection].configs=configs
-      
     }
   }
   return newarr
 }
+export function layoutPropertyChange(state,configs){
+  var newarr = state.widgets;
+  var alterType=state.setting.setType
+  var layerInfo = state.currentContainner;
+  var setobj = state.setting.setobjInfo;
+  if(layerInfo&&layerInfo.level==1){
+      if(alterType=='row'){
+        if(setobj)
+          newarr[layerInfo.row].cols[layerInfo.col].widgets[setobj.row].configs =configs
+        else{
+          newarr[layerInfo.row].cols[layerInfo.col].widgets[state.selection].configs =configs
+        }
+      }
+      else if(alterType=='container'){
+        newarr.configs=configs
+      }
+  }else{
+      if(alterType=='row')
+        newarr[state.selection].configs=configs
+      else if(alterType=='container'){
+        newarr.configs=configs
+      }
+  }
+  return newarr
+
+}
 export function widgetsAddHandler(state,type,layerInfo){
     let newcol = {};
     let additem  = getWidgetsConfig(type)
+    let copycongig = JSON.parse(JSON.stringify(additem))
+    console.log('新列',copycongig)
     let data = state.widgets;
     newcol.type = type;
-    newcol=Object.assign(newcol,additem)
+    Object.assign(newcol,copycongig)
     if(layerInfo&&layerInfo.level==1){
 
         data[layerInfo.row].cols[layerInfo.col].widgets[state.selection].cols.push(newcol)
@@ -52,6 +79,13 @@ export function lineAddHandler(oldWidgets,layerInfo){
     let newrow =   {
           name:'line3',
           cols:[],
+          configs:{
+            arrangeWay_x:1,
+            arrangeWay_y:1,
+            lineH:50,
+            backColor:null,
+            isAuto:true
+          }
       }
       if(layerInfo&&layerInfo.level==1){
         oldWidgets[layerInfo.row].cols[layerInfo.col].widgets.push(newrow)

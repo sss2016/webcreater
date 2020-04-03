@@ -1,4 +1,4 @@
-import {CHANGE,ADD_WIDGET,ADD_LINE,SELECTROW,SETTINGSHOW,SET_CONTAINNER,SET_Field,SET_PROPERTY} from './actionType'
+import {CHANGE,ADD_WIDGET,ADD_LINE,SELECTROW,SETTINGSHOW,SET_CONTAINNER,SET_Field,SET_PROPERTY,SET_LAYOUT_PROPERTY} from './actionType'
 export function changeLayout(payload){
   console.log('数据',payload)
   return{
@@ -41,6 +41,13 @@ export function pageFormField_set(payload){
     type:SET_Field,
     payload:payload
   }
+}
+export function layoutPropertyChange(payload){
+  return{
+    type:SET_LAYOUT_PROPERTY,
+    payload:payload
+  }
+  
 }
 export function property_set(payload){
   return{
