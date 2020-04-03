@@ -47,9 +47,8 @@ class Dragging extends Component {
 			height:this.state.height
 		}
 		let outW = $('#vHTML').width();
-		let outH = $('#vHTML').height();
 		let width = Math.round(size.width/outW*100)+'%'
-		let height = size.height/outH
+		let height = size.height
 		let pos ={
 			layerinfo:this.props.parentlayerinfo,
 			row:this.props.row,

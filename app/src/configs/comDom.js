@@ -1,10 +1,8 @@
 import { Form, Input, Button, Checkbox,Radio,DatePicker,Select} from 'antd';
 import moment from 'moment';
 import IForm from '../components/IForm/view'
-import MForm from '../components/IForm/IForm'
 import React from 'react';
 import { Carousel } from 'antd';
-import '../index.css';
 
 // import Container from "./components/Container/view";
 const buttonStyle=[
@@ -33,11 +31,6 @@ export function getImageDom(styles,model){
 export function getFormDom(styles,layerinfo,model){
     return (
         <IForm  layerinfo={layerinfo}  style={{width: '100%',height:'100%'}}>表单</IForm>
-    );
-}
-export function getFormDom_prod(datas,configs){
-    return (
-        <MForm  datas={datas} style={{width: '100%',height:'100%'}}>表单</MForm>
     );
 }
 export function getCarouselDom(styles,model){

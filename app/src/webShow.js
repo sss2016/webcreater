@@ -14,23 +14,20 @@ class App extends React.Component {
   state={
     datas:[]
   }
-  constructor(){
-    super();
-  }
-componentWillMount(){
-  let self = this
-  fetch('/api/getView', {
-    method: 'get',
-  }).then((data)=>data.json()).then(
-function(data){
-  self.setState({
-    datas:data.content
-  })
-}
-  ).catch(err=>{
-    console.log(err)
-})
-}
+// componentWillMount(){
+//   let self = this
+//   fetch('/api/getView', {
+//     method: 'get',
+//   }).then((data)=>data.json()).then(
+// function(data){
+//   self.setState({
+//     datas:data.content
+//   })
+// }
+//   ).catch(err=>{
+//     console.log(err)
+// })
+// }
   render(){
     // let datas = this.state.datas||[]
   return (

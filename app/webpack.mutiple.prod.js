@@ -1,4 +1,5 @@
 const merge = require('webpack-merge');
+const CopyPlugin = require('copy-webpack-plugin');
 const InlineChunkHtmlPlugin = require('react-dev-utils/InlineChunkHtmlPlugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
@@ -44,6 +45,11 @@ const plugins = [
         filename: 'css/[name].[contenthash:8].css',
         chunkFilename: 'css/[name].[contenthash:8].chunk.css',
       }),
+      new CopyPlugin([
+
+        { from: 'public/others/', to: './',force:true }
+        
+        ]),
       new CleanWebpackPlugin()
 ];
     // 配置相应的规则

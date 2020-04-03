@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import {Form} from 'antd';
 import _ from "lodash";
-import 'antd/dist/antd.css';
 import {
 	getForm_checkbox,getForm_select,getForm_datepicker,
 	getForm_radio,getForm_submit,getForm_input
-} from '../../configs/comDom';
+} from '../../configs/ssrCom';
 class MForm extends Component {
     handleSubmit(e){
         e.preventDefault();
@@ -47,16 +46,26 @@ class MForm extends Component {
 		return component;
     }
     createEl(){
-        var viewH = document.documentElement.clientHeight
+        let boxarrangeWay = ['left','center','right']
+        let flexarrangeWay=['flex-start','center','flex-end']
         return  _.map(this.props.datas, (l, i) => {
+          let style =!l.configs.isAuto?{
+            height:l.configs.lineH,
+            display:'flex',
+            alignItems:flexarrangeWay[l.configs.arrangeWay_y-1],
+            justifyContent:flexarrangeWay[l.configs.arrangeWay_x-1],
+        }:{
+            height:'auto',
+            textAlign:boxarrangeWay[l.configs.arrangeWay_x-1]
+        }
               return(
-                  <div  key={i}>
+                  <div  key={i} style={style} >
                       {
                       _.map(l.cols,(v,k)=>{
 
                         return(  
                          <div className='col' key={k} 
-                         style={{width:v.layout.width,height:v.layout.height*viewH,
+                         style={{width:v.layout.width,height:v.layout.height,
                          marginTop:v.layout.margintop,
                          marginLeft:v.layout.marginleft}} >
                              {this.getMyStyleByType(v.type,v)}

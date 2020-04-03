@@ -33,9 +33,7 @@ router.get('/index', isuser,function(req, res, next) {
 router.get('/admin', function(req, res, next) {
     res.sendFile(path.join(__dirname, '../public/dist/', 'admin.html'));
 });
-router.get('/show/:autor/:id', function(req, res, next) {
-  res.sendFile(path.join(__dirname, '../public/dist/', 'main.html'));
-});
+router.get('/show/:author/:id', indexController.showSSR);
 // router.get('/show/:author/:id',);
 router.get('/login', function(req, res, next) {
   res.sendFile(path.join(__dirname, '../public/dist', 'login.html'));
